@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: minepicco/cc-build-image:1.0
     steps:
+      - checkout
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
@@ -11,8 +12,9 @@ jobs:
           command: apt-get update && apt-get -y install jq
       - run:
           name: GET CloudFormation template
-          #command: wget https://raw.githubusercontent.com/minepicco/prisma_ci_sample/master/0_high_alert.template -O demo.template
-          command: wget https://raw.githubusercontent.com/minepicco/prisma_ci_sample/master/1_high_alert.template -O demo.template
+          command: |
+          #    cat 0_high_alert.template > demo.template
+              cat 1_high_alert.template > demo.template
       - run:
           name: GET audit result
           command: |
