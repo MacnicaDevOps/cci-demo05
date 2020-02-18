@@ -16,7 +16,6 @@ jobs:
       - run:
           name: GET audit result
           command: |
-              result=`curl --data-binary @demo.template -X POST https://scanapi.redlock.io/v1/iac | jq .result.severity_stats.high` && echo $result && if [ $result -gt 0 ]; then echo "You have "$result" high alert(s)."&& curl --data-binary @demo.template -X POST https://scanapi.redlock.io/v1/iac | jq  '.result.rules_matched[] | select(.severity == "high")| .name' && exit 1; else echo "No high alert was detected"; fi;
               curl --data-binary @demo.template -X POST https://scanapi.redlock.io/v1/iac > output.json
               result=`cat output.json| jq .result.severity_stats.high`
               if [ $result -gt 0 ]; then 
