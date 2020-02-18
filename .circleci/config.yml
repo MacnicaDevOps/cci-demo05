@@ -12,8 +12,8 @@ jobs:
           command: apt-get update && apt-get -y install jq
       - run:
           name: GET CloudFormation template
-          #command: cat 0_high_alert.template > demo.template
-          command: cat 1_high_alert.template > demo.template
+          command: cat 0_high_alert.template > demo.template
+          #command: cat 1_high_alert.template > demo.template
       - run:
           name: GET audit result
           command: |
