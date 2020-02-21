@@ -26,3 +26,4 @@ jobs:
               else 
                   echo "No high alert was detected"; 
               fi;
+
