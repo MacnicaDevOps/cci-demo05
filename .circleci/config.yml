@@ -6,10 +6,10 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Prepare environment
-          command: apt-get update && apt-get -y install jq
+      #    docker_layer_caching: true
+      #- run:
+      #    name: Prepare environment
+      #    command: apt-get update && apt-get -y install jq
       - run:
           name: GET CloudFormation template
           #command: cat 0_high_alert.template > demo.template
