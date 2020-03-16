@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: minepicco/cc-build-image:1.0
+      - image: macnicadevops/cci-build-aws:1.0
     steps:
       - checkout
       - setup_remote_docker:
