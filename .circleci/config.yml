@@ -3,9 +3,11 @@ jobs:
   build:
     docker:
       - image: macnicadevops/cci-build-aws:1.0
+        environment:
+          SEVERITY_THRESHOLD: high
     steps:
       - checkout
-      - setup_remote_docker:
+      - setup_remote_docker
       - run:
           name: GET CloudFormation template
           command: cat 0_high_alert.template > demo.template
@@ -14,10 +16,10 @@ jobs:
           name: GET audit result
           command: |
               curl --data-binary @demo.template -X POST https://scanapi.redlock.io/v1/iac > output.json
-              result=`cat output.json| jq .result.severity_stats.high`
+              result=`cat output.json| jq .result.severity_stats.$SEVERITY_THRESHOLD`
               if [ $result -gt 0 ]; then 
-                  echo "You have "$result" high alert(s).";
-                  cat output.json | jq  '.result.rules_matched[] | select(.severity == "high")| .name';
+                  echo "You have "$result" "$SEVERITY_THRESHOLD" alert(s).";
+                  cat output.json | jq  '.result.rules_matched[] | select(.severity == "'$SEVERITY_THRESHOLD'")| .name';
                   exit 1; 
               else 
                   echo "No high alert was detected"; 
