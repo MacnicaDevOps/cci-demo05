@@ -10,8 +10,8 @@ jobs:
       - setup_remote_docker
       - run:
           name: GET CloudFormation template
-          command: cat 0_high_alert.template > demo.template
-          # command: cat 1_high_alert.template > demo.template
+          # command: cat 0_high_alert.template > demo.template
+          command: cat 1_high_alert.template > demo.template
       - run:
           name: GET audit result
           command: |
@@ -22,6 +22,6 @@ jobs:
                   cat output.json | jq  '.result.rules_matched[] | select(.severity == "'$SEVERITY_THRESHOLD'")| .name';
                   exit 1; 
               else 
-                  echo "No high alert was detected"; 
+                  echo "No alert was detected"; 
               fi;
 
