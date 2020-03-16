@@ -24,4 +24,3 @@ jobs:
               else 
                   echo "No alert was detected"; 
               fi;
-
